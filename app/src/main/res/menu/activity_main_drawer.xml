@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@drawable/categories_icon"
+            android:title="Meal Categories" />
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_baseline_favorite_24"
+            android:title="Favorites" />
+        <item
+            android:id="@+id/nav_country"
+            android:icon="@drawable/country_categories_icon"
+            android:title="Countries" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="Settings" />
+        </menu>
+    </item>
+
+</menu>
