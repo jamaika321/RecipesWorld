@@ -56,31 +56,31 @@ class RepositoryImpl(private val webClient: RetrofitServices, private val localR
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun getAreaCategories(): Single<MealCategoriesObject> {
-        return webClient
-                .getAreaCategoriesList("list")
-                .subscribeOn(Schedulers.io())
-
-    }
-
-    override fun getAreaCategoriesFromLocalDB(): Single<Array<FoodClassesList>> {
-        return localRoomClient
-                .dao()
-                .getMealCategories()
-                .subscribeOn(Schedulers.io())
-    }
-
-    override fun insertAreaCategories(areaCategoriesList: Array<FoodClassesList>) {
-        disposable = Single.fromCallable {
-            localRoomClient.dao().insertMealCategories(areaCategoriesList)}
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    onSuccess(disposable, "Area Categories List Updated")
-                },{
-                    error -> onError(disposable, error.localizedMessage)
-                })
-    }
+//    override fun getAreaCategories(): Single<MealCategoriesObject> {
+//        return webClient
+//                .getAreaCategoriesList("list")
+//                .subscribeOn(Schedulers.io())
+//
+//    }
+//
+//    override fun getAreaCategoriesFromLocalDB(): Single<Array<FoodClassesList>> {
+//        return localRoomClient
+//                .dao()
+//                .getMealCategories()
+//                .subscribeOn(Schedulers.io())
+//    }
+//
+//    override fun insertAreaCategories(areaCategoriesList: Array<FoodClassesList>) {
+//        disposable = Single.fromCallable {
+//            localRoomClient.dao().insertMealCategories(areaCategoriesList)}
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    onSuccess(disposable, "Area Categories List Updated")
+//                },{
+//                    error -> onError(disposable, error.localizedMessage)
+//                })
+//    }
 
     override fun getMealCategories(): Single<MealCategoriesObject> {
         return webClient
@@ -107,36 +107,61 @@ class RepositoryImpl(private val webClient: RetrofitServices, private val localR
                 })
     }
 
-    override fun getRecipeListByCategories(categories : String): Single<RecipeListObject> {
+    override fun getRecipeListByCategories(categories: String): Single<RecipeListObject> {
         return webClient
                 .getRecipeListByCategories(categories)
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun getRecipeListByArea(area: String): Single<RecipeListObject> {
-        return webClient
-                .getRecipeListByArea(area)
-                .subscribeOn(Schedulers.io())
-    }
-
-    override fun getRecipeListFromLocalDB(): Single<Array<RecipeList>> {
+    override fun getRecipeListByCategoriesFromLocalDB(categories: String): Single<RecipeListObject> {
         return localRoomClient
                 .dao()
-                .getRecipeList()
+                .getRecipeListByCategories(categories)
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun insertRecipeList(recipeList: Array<RecipeList>) {
+    override fun insertRecipeListByCategories(recipeList: RecipeListObject) {
         disposable = Single.fromCallable {
             localRoomClient.dao().insertRecipeList(recipeList)}
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    onSuccess(disposable, "Meal Categories List Updated")
+                    onSuccess(disposable, "Recipe List Updated")
                 },{
                     error -> onError(disposable, error.localizedMessage)
                 })
     }
+
+//    override fun getRecipeListByCategories(categories : String): Single<RecipeListObject> {
+//        return webClient
+//                .getRecipeListByCategories(categories)
+//                .subscribeOn(Schedulers.io())
+//    }
+//
+//    override fun getRecipeListByArea(area: String): Single<RecipeListObject> {
+//        return webClient
+//                .getRecipeListByArea(area)
+//                .subscribeOn(Schedulers.io())
+//    }
+//
+//    override fun getRecipeListFromLocalDB(categories: String): Single<Array<RecipeList>> {
+//        return localRoomClient
+//                .dao()
+//                .getRecipeListByCategory(categories)
+//                .subscribeOn(Schedulers.io())
+//    }
+//
+//    override fun insertRecipeList(recipeList: Array<RecipeList>) {
+//        disposable = Single.fromCallable {
+//            localRoomClient.dao().insertRecipeList(recipeList)}
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    onSuccess(disposable, "Meal Categories List Updated")
+//                },{
+//                    error -> onError(disposable, error.localizedMessage)
+//                })
+//    }
 
     private fun onSuccess(disposable: Disposable?, msg : String){
         Log.d(TAG , msg)

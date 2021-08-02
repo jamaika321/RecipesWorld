@@ -7,10 +7,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import ru.radiknasybullin.cameraphone.data.db.dao.Dao
+import ru.radiknasybullin.cameraphone.data.entities.FoodClassesList
 import ru.radiknasybullin.cameraphone.data.entities.IngredientList
 import ru.radiknasybullin.cameraphone.data.entities.RecipeList
+import ru.radiknasybullin.cameraphone.data.entities.RecipeListObject
 
-@Database(entities = [RecipeList::class, IngredientList::class], version = 1, exportSchema = false)
+@Database(entities = [RecipeList::class, RecipeListObject::class, IngredientList::class, FoodClassesList::class], version = 1, exportSchema = false)
 abstract class LocalRoomDb: RoomDatabase() {
     abstract fun dao(): Dao
 

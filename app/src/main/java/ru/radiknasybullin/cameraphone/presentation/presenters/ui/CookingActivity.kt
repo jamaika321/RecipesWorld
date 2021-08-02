@@ -59,11 +59,15 @@ class CookingActivity : AppCompatActivity(), CommonInterfaces.View{
     }
 
     override fun onLoadedRecipeData(recipe: RecipeList) {
-        Picasso.get().load(recipe.strMealThumb.toUri()).into(mBinding.ivIconMeal)
+        Picasso.get().load(recipe.strMealThumb?.toUri()).into(mBinding.ivIconMeal)
         mBinding.tvMealName.text = recipe.strMeal
     }
 
     override fun onLoadedError() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showLoadingProgressDialog(show: Boolean) {
         TODO("Not yet implemented")
     }
 }

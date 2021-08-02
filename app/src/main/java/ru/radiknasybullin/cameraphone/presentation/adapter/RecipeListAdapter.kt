@@ -14,7 +14,7 @@ import ru.radiknasybullin.cameraphone.R
 import ru.radiknasybullin.cameraphone.presentation.presenters.ui.CookingActivity
 import ru.radiknasybullin.cameraphone.data.entities.RecipeList
 
-class RecipeListAdapter(private val recipeListR : List<RecipeList>, contextR: Context?): RecyclerView.Adapter<RecipeListAdapter.RecipeListViewHolder>() {
+class RecipeListAdapter(recipeListR : List<RecipeList>, contextR: Context?): RecyclerView.Adapter<RecipeListAdapter.RecipeListViewHolder>() {
 
     var recipeList : List<RecipeList> = recipeListR
     val context : Context? = contextR
@@ -57,10 +57,4 @@ class RecipeListAdapter(private val recipeListR : List<RecipeList>, contextR: Co
     override fun getItemCount(): Int {
         return recipeList.size
     }
-
-    fun updateData(recipeListNew: List<RecipeList>){
-        recipeList = recipeListNew
-        notifyDataSetChanged()
-    }
-
 }

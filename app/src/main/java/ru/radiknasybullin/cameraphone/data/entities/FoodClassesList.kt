@@ -10,8 +10,6 @@ class FoodClassesList (
     val id : Int,
     @SerializedName("strCategory")
     val strCategory: String = "",
-    @SerializedName("strArea")
-    val strArea: String = "",
     @SerializedName("strCategoryThumb")
     val strCategoryThumb : String = "",
     @SerializedName("strCategoryDescription")

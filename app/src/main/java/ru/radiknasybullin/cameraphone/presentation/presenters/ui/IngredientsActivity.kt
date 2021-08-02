@@ -78,4 +78,8 @@ class IngredientsActivity : BaseActivity(0) ,
     override fun onLoadedError() {
         TODO("Not yet implemented")
     }
+
+    override fun showLoadingProgressDialog(show: Boolean) {
+        TODO("Not yet implemented")
+    }
 }

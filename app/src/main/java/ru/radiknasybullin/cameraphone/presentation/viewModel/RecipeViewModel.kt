@@ -8,7 +8,16 @@ import ru.radiknasybullin.cameraphone.domain.usecases.GetRecipeList
 
 class RecipeViewModel(private val useCases : GetRecipeList) : ViewModel() {
 
-    fun getFirstLetterRecipeList(firstLetter: String) {
-        useCases.getFirstLetterRecipeList(firstLetter)
+//    fun loadAreaList(){
+//        useCases.loadAreaListRemote()
+//    }
+
+    fun loadCategoriesList(){
+        useCases.loadCategoriesListFromLocalDB()
     }
+
+    fun loadRecipeList(category: String){
+        useCases.loadRecipeListByCategoriesFromLocalDB(category)
+    }
+
 }
