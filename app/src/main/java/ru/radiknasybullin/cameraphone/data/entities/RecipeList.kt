@@ -9,17 +9,17 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "recipes")
 class RecipeList(
-        @PrimaryKey
     @SerializedName("idMeal")
     val idMeal: Int,
+    @PrimaryKey
     @SerializedName("strMeal")
-    val strMeal: String? = "",
+    val strMeal: String,
     @SerializedName("strMealThumb")
     val strMealThumb : String? = ""
         ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
-            parcel.readString(),
+        parcel.readString().toString(),
             parcel.readString()) {
     }
 

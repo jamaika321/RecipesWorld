@@ -1,18 +1,13 @@
 package ru.radiknasybullin.cameraphone.data.db.database
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import ru.radiknasybullin.cameraphone.data.db.dao.Dao
-import ru.radiknasybullin.cameraphone.data.entities.FoodClassesList
-import ru.radiknasybullin.cameraphone.data.entities.IngredientList
-import ru.radiknasybullin.cameraphone.data.entities.RecipeList
-import ru.radiknasybullin.cameraphone.data.entities.RecipeListObject
+import ru.radiknasybullin.cameraphone.data.entities.*
 
-@Database(entities = [RecipeList::class, RecipeListObject::class, IngredientList::class, FoodClassesList::class], version = 1, exportSchema = false)
+@Database(entities = [AreaCategoriesList::class, RecipeListObject::class, IngredientList::class, MealCategoriesList::class, RecipeList::class], version = 1, exportSchema = false)
 abstract class LocalRoomDb: RoomDatabase() {
     abstract fun dao(): Dao
 

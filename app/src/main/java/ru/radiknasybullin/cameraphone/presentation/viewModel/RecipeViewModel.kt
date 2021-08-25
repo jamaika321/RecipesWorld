@@ -1,23 +1,44 @@
 package ru.radiknasybullin.cameraphone.presentation.viewModel
 
-import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
-import ru.radiknasybullin.cameraphone.data.api.Common
-import ru.radiknasybullin.cameraphone.data.api.RetrofitServices
-import ru.radiknasybullin.cameraphone.domain.usecases.GetRecipeList
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import ru.radiknasybullin.cameraphone.data.entities.AreaCategoriesList
+import ru.radiknasybullin.cameraphone.data.entities.MealCategoriesList
+import ru.radiknasybullin.cameraphone.data.entities.RecipeList
+import ru.radiknasybullin.cameraphone.data.entities.RecipeListObject
+import ru.radiknasybullin.cameraphone.data.repository.NewRepository
 
-class RecipeViewModel(private val useCases : GetRecipeList) : ViewModel() {
+class RecipeViewModel(application: Application) : AndroidViewModel(application) {
+    private val TAG = "RecipeViewModel"
 
-//    fun loadAreaList(){
-//        useCases.loadAreaListRemote()
-//    }
+    private var repository : NewRepository = NewRepository(application)
 
-    fun loadCategoriesList(){
-        useCases.loadCategoriesListFromLocalDB()
+    fun getRecipeByName(name: String): LiveData<RecipeList>{
+        return repository.getRecipeByName(name)
     }
 
-    fun loadRecipeList(category: String){
-        useCases.loadRecipeListByCategoriesFromLocalDB(category)
+    fun getRecipeListByCategoriesFromLocalDB(categories: String): LiveData<RecipeListObject>{
+        return repository.getRecipeListByCategoriesFromLocalDB(categories)
     }
 
+    fun loadRecipeListByCategories(categories: String){
+        repository.loadRecipeListByCategories(categories)
+    }
+
+    fun getMealCategoriesListFromLocalDB(): LiveData<Array<MealCategoriesList>>{
+        return repository.getMealCategoriesFromLocalDB()
+    }
+
+    fun loadMealCategoriesList(){
+        repository.loadMealCategories()
+    }
+
+    fun getAreaCategoriesListFromLocalDB(): LiveData<Array<AreaCategoriesList>>{
+        return repository.getAreaCategoriesListFromLocalDB()
+    }
+
+    fun loadAreaCategoriesList(){
+        repository.loadAreaCategoriesList("list")
+    }
 }

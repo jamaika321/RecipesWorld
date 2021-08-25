@@ -1,6 +1,7 @@
 package ru.radiknasybullin.cameraphone.presentation.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,13 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.radiknasybullin.cameraphone.R
-import ru.radiknasybullin.cameraphone.data.entities.FoodClassesList
+import ru.radiknasybullin.cameraphone.data.entities.MealCategoriesList
 import ru.radiknasybullin.cameraphone.domain.interfaces.ListItemClickListener
+import ru.radiknasybullin.cameraphone.presentation.presenters.ui.CookingActivity
 
-class FoodClassesAdapter(foodClassesListR : List<FoodClassesList>, contextR : Context, private val itemClicker: ListItemClickListener): RecyclerView.Adapter<FoodClassesAdapter.FoodClassesViewHolder>() {
+class FoodClassesAdapter(foodClassesListR : List<MealCategoriesList>, contextR : Context, val itemClicker : ListItemClickListener): RecyclerView.Adapter<FoodClassesAdapter.FoodClassesViewHolder>() {
 
-    val foodClassesList : List<FoodClassesList> = foodClassesListR
+    val foodClassesList : List<MealCategoriesList> = foodClassesListR
     val context = contextR
 
     class FoodClassesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

@@ -4,63 +4,48 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import io.reactivex.disposables.CompositeDisposable
-import ru.radiknasybullin.cameraphone.data.api.RetrofitClient
-import ru.radiknasybullin.cameraphone.data.db.database.LocalRoomDb
 import ru.radiknasybullin.cameraphone.data.entities.RecipeList
-import ru.radiknasybullin.cameraphone.data.repository.RepositoryImpl
 import ru.radiknasybullin.cameraphone.databinding.ActivityCookingBinding
 import ru.radiknasybullin.cameraphone.domain.interfaces.CommonInterfaces
-import ru.radiknasybullin.cameraphone.domain.usecases.GetRecipeExample
-import ru.radiknasybullin.cameraphone.presentation.viewModel.CookingViewModel
+import ru.radiknasybullin.cameraphone.presentation.viewModel.RecipeViewModel
 
 
 class CookingActivity : AppCompatActivity(), CommonInterfaces.View{
 
     private val TAG = "CookingActivity"
     lateinit var mBinding: ActivityCookingBinding
-    val disposable = CompositeDisposable()
     var id = 0
-    private lateinit var cookingViewModel: CookingViewModel
+    lateinit var recipeViewModel : RecipeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityCookingBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        cookingViewModel = CookingViewModel(GetRecipeExample(RepositoryImpl(RetrofitClient.getClient(), LocalRoomDb.getAppDataBase(applicationContext)), this))
+        recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel::class.java)
 
-        loadData()
-
-        if(intent.extras?.isEmpty == false){
+        if(intent.extras!!.getString("recipeName") != null){
             Log.d(TAG, "Extras isn't empty")
-            id = intent.extras!!.getInt("dish_id")
-            showIntentDish()
+            recipeViewModel.getRecipeByName(getDishName()!!).observe(this, Observer{
+                initView(it)
+            })
         } else {
             Log.d(TAG, "Extras is empty")
         }
     }
 
-    fun showIntentDish(){
-        val dishId : Int = intent.extras!!.getInt("dish_id")
-
-
+    fun getDishName(): String? {
+        val dish: String? = intent.extras!!.getString("recipeName")
+        return dish
     }
 
-//    fun loadingData(dish: RecipeList) {
-//        mBinding.collapsingToolbar.title = dish.strMeal
-//        mBinding.tvMealName.text = dish.strInstructions
-//        Picasso.get().load(dish.strMealThumb?.toUri()).into(mBinding.ivIconMeal)
-//    }
-
-    fun loadData(){
-        cookingViewModel.getDishById(52772)
-    }
-
-    override fun onLoadedRecipeData(recipe: RecipeList) {
-        Picasso.get().load(recipe.strMealThumb?.toUri()).into(mBinding.ivIconMeal)
+    fun initView(recipe : RecipeList){
         mBinding.tvMealName.text = recipe.strMeal
+        Picasso.get().load(recipe?.strMealThumb?.toUri()).into(mBinding.ivIconMeal)
     }
 
     override fun onLoadedError() {

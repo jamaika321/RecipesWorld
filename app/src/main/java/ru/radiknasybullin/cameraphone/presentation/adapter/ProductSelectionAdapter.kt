@@ -100,8 +100,8 @@ class ProductSelectionAdapter(private val productList : List<IngredientList>, co
         }
     }
 
-    fun getActualProductList(): List<IngredientList> {
-        return productFilterList
+    fun getActualProductList(): Array<IngredientList> {
+        return productFilterList.toTypedArray()
     }
 
     override fun getItemCount(): Int {

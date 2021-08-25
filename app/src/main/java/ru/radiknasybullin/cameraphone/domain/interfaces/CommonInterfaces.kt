@@ -1,39 +1,33 @@
 package ru.radiknasybullin.cameraphone.domain.interfaces
 
-import io.reactivex.Observable
+import android.content.Context
+import androidx.lifecycle.LiveData
 import io.reactivex.Single
 import ru.radiknasybullin.cameraphone.data.entities.*
 
 interface CommonInterfaces {
 
-    interface Repositories{
-        fun getAllIngredients(list : String): Single<IngredientObject>
-        fun getAllIngredientsFromLocalDB(): Single<Array<IngredientList>>
-        fun insertIngredientsList(ingredientsList: Array<IngredientList>)
+    interface NewRepository{
 
-        fun getDishById(id : Int): Single<RecipeListObject>
-        fun getDishByIdFromLocalDB(id : Int): Single<RecipeList>
+        fun getIngredientListFromLocalDB(): LiveData<Array<IngredientList>>
+        fun insertIngredientList(ingredientList: Array<IngredientList>)
+        fun loadIngredientListRemote()
 
-//        fun getAreaCategories(): Single<MealCategoriesObject>
-//        fun getAreaCategoriesFromLocalDB(): Single<Array<FoodClassesList>>
-//        fun insertAreaCategories(areaCategoriesList: Array<FoodClassesList>)
+        fun getRecipeByName(name: String): LiveData<RecipeList>
+        fun getRecipeListByCategoriesFromLocalDB(categories: String): LiveData<RecipeListObject>
+        fun insertRecipeListByCategories(recipeList: RecipeListObject, category: String)
+        fun loadRecipeListByCategories(categories: String)
 
-        fun getMealCategories(): Single<MealCategoriesObject>
-        fun getMealCategoriesFromLocalDB(): Single<Array<FoodClassesList>>
-        fun insertMealCategoriesList(mealCategoriesList: Array<FoodClassesList>)
+        fun getMealCategoriesFromLocalDB(): LiveData<Array<MealCategoriesList>>
+        fun insertMealCategoriesList(mealCategoriesList: Array<MealCategoriesList>)
+        fun loadMealCategories()
 
-//        fun getRecipeListByCategories(categories: String): Single<RecipeListObject>
-//        fun getRecipeListByArea(area : String): Single<RecipeListObject>
-//        fun getRecipeListFromLocalDB(categories: String): Single<Array<RecipeList>>
-//        fun insertRecipeList(recipeList : Array<RecipeList>)
-
-        fun getRecipeListByCategories(categories: String): Single<RecipeListObject>
-        fun getRecipeListByCategoriesFromLocalDB(categories: String): Single<RecipeListObject>
-        fun insertRecipeListByCategories(recipeList : RecipeListObject)
+        fun getAreaCategoriesListFromLocalDB(): LiveData<Array<AreaCategoriesList>>
+        fun insertAreaCategoriesList(areaCategoriesList: Array<AreaCategoriesList>)
+        fun loadAreaCategoriesList(list: String)
     }
 
     interface View{
-        fun onLoadedRecipeData(recipe: RecipeList)
         fun onLoadedError()
         fun showLoadingProgressDialog(show: Boolean)
     }

@@ -3,10 +3,14 @@ package ru.radiknasybullin.cameraphone.presentation.presenters.ui
 import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.bottom_navigation_view.*
 import ru.radiknasybullin.cameraphone.R
+import ru.radiknasybullin.cameraphone.databinding.BottomNavigationViewBinding
+import ru.radiknasybullin.cameraphone.domain.interfaces.CommonInterfaces
 
-abstract class BaseActivity(val navNumber: Int) : AppCompatActivity() {
+abstract class BaseActivity(val navNumber: Int) : AppCompatActivity(),
+        CommonInterfaces.BroadCastReceiver{
     private val TAG = "BaseActivity"
 
     fun setupBottomNavigation(){

@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import ru.radiknasybullin.cameraphone.data.db.dao.Converter
 
-@Entity(tableName = "categoriesRecipeList")
+@Entity(tableName = "recipeList")
 @TypeConverters(Converter::class)
 class RecipeListObject (
         @SerializedName("meals")

@@ -1,42 +1,42 @@
 package ru.radiknasybullin.cameraphone.presentation.presenters.ui
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import dmax.dialog.SpotsDialog
-import io.reactivex.disposables.CompositeDisposable
-import ru.radiknasybullin.cameraphone.data.api.Common
-import ru.radiknasybullin.cameraphone.data.api.RetrofitServices
 import ru.radiknasybullin.cameraphone.data.entities.IngredientList
-import ru.radiknasybullin.cameraphone.data.entities.RecipeList
 import ru.radiknasybullin.cameraphone.databinding.ActivityIngredientsBinding
-import ru.radiknasybullin.cameraphone.domain.interfaces.CommonInterfaces
+import ru.radiknasybullin.cameraphone.domain.interfaces.IngredientsActivityInterface
 import ru.radiknasybullin.cameraphone.presentation.adapter.ProductSelectionAdapter
+import ru.radiknasybullin.cameraphone.presentation.viewModel.IngredientsViewModel
 
 
 class IngredientsActivity : BaseActivity(0) ,
-        CommonInterfaces.BroadCastReceiver ,
-        CommonInterfaces.View {
+        IngredientsActivityInterface.View {
 
     private val TAG = "IngredientsActivity"
-    lateinit var mService: RetrofitServices
     lateinit var adapter : ProductSelectionAdapter
     lateinit var mBinding : ActivityIngredientsBinding
     lateinit var dialog: AlertDialog
-    val disposable = CompositeDisposable()
+    lateinit var ingredientViewModel : IngredientsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityIngredientsBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        mService = Common.retrofitServices
         dialog = SpotsDialog.Builder().setCancelable(true).setContext(this).build()
-        val productsList : ArrayList<IngredientList> = arrayListOf(IngredientList(0, " ", " ", false))
 
-        adapter = ProductSelectionAdapter(productsList, this)
+        ingredientViewModel = ViewModelProviders.of(this).get(IngredientsViewModel::class.java)
+
+        val fakeProductsList : ArrayList<IngredientList> = arrayListOf(IngredientList(0, " ", " ", false))
+
+        adapter = ProductSelectionAdapter(fakeProductsList, this)
         mBinding.rcView.adapter = adapter
         mBinding.rcView.layoutManager = LinearLayoutManager(this)
 
@@ -58,10 +58,29 @@ class IngredientsActivity : BaseActivity(0) ,
                 mBinding.productSearch.setIconified(false)
             }
         })
+
+        ingredientViewModel.getIngredientListFromLocalDB()!!
+            .observe(this, Observer{
+                if(it.isNotEmpty()) {
+                    adapter = ProductSelectionAdapter(it.toList(), this)
+                    mBinding.rcView.adapter = adapter
+                }else{
+                    loadIngredientsList()
+                }
+            })
+        changeSaved()
     }
 
+    fun loadIngredientsList(){
+        ingredientViewModel.loadIngredientsList()
+    }
 
-
+    fun changeSaved(){
+        mBinding.btnSave.setOnClickListener {
+            val intent = Intent(this, RecipeListActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
     override fun onInternetConnectionSuccess() {
         TODO("Not yet implemented")
@@ -71,15 +90,8 @@ class IngredientsActivity : BaseActivity(0) ,
         TODO("Not yet implemented")
     }
 
-    override fun onLoadedRecipeData(recipe: RecipeList) {
-        TODO("Not yet implemented")
-    }
 
     override fun onLoadedError() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showLoadingProgressDialog(show: Boolean) {
         TODO("Not yet implemented")
     }
 }
