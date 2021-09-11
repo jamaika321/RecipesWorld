@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".presentation.presenters.fragments.RecipeDetailFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:theme="@style/Theme.ForChecked.AppBarOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/color_primary"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                app:title="Dish">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_icon_meal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ic_launcher_foreground"/>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#30000000"
+                    app:layout_collapseMode="pin">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/previous_image_cook"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="13dp"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/favorites_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="20dp"
+                        app:srcCompat="@drawable/ic_baseline_star_off"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.appcompat.widget.Toolbar>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:id="@+id/ing_1"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    android:text="Ingredient"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ing_2"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_1" />
+
+                <TextView
+                    android:id="@+id/ing_3"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_2" />
+
+                <TextView
+                    android:id="@+id/ing_4"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_3" />
+
+                <TextView
+                    android:id="@+id/ing_5"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_4" />
+
+                <TextView
+                    android:id="@+id/ing_6"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_5" />
+
+                <TextView
+                    android:id="@+id/ing_7"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_6" />
+
+                <TextView
+                    android:id="@+id/ing_8"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_7" />
+
+                <TextView
+                    android:id="@+id/ing_9"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/ing_10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_8" />
+
+                <TextView
+                    android:id="@+id/ing_10"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toTopOf="@id/tv_meal_description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ing_9" />
+
+                <TextView
+                    android:id="@+id/tv_meal_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/IngredientTextView"
+                    android:contextClickable="true"
+                    android:padding="10dp"
+                    android:text="Описание"
+                    android:textSize="25sp"
+                    app:layout_constraintTop_toBottomOf="@id/ing_10" />
+
+                <TextView
+                    android:id="@+id/mer1"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_1"
+                    app:layout_constraintTop_toTopOf="@+id/ing_1" />
+
+                <TextView
+                    android:id="@+id/mer2"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_2"
+                    app:layout_constraintTop_toTopOf="@+id/ing_2" />
+
+                <TextView
+                    android:id="@+id/mer3"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_3"
+                    app:layout_constraintTop_toTopOf="@+id/ing_3" />
+
+                <TextView
+                    android:id="@+id/mer4"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_4"
+                    app:layout_constraintTop_toTopOf="@+id/ing_4" />
+
+                <TextView
+                    android:id="@+id/mer5"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_5"
+                    app:layout_constraintTop_toTopOf="@+id/ing_5" />
+
+                <TextView
+                    android:id="@+id/mer6"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_6"
+                    app:layout_constraintTop_toTopOf="@+id/ing_6" />
+
+                <TextView
+                    android:id="@+id/mer7"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_7"
+                    app:layout_constraintTop_toTopOf="@+id/ing_7" />
+
+                <TextView
+                    android:id="@+id/mer8"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_8"
+                    app:layout_constraintTop_toTopOf="@+id/ing_8" />
+
+                <TextView
+                    android:id="@+id/mer9"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_9"
+                    app:layout_constraintTop_toTopOf="@+id/ing_9" />
+
+                <TextView
+                    android:id="@+id/mer10"
+                    android:layout_width="@dimen/ingredient_layout_height"
+                    android:layout_height="@dimen/ingredient_layout_width"
+                    android:gravity="center"
+                    style="@style/IngredientTextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/ing_10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ing_10"
+                    app:layout_constraintTop_toTopOf="@+id/ing_10" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
