@@ -1,7 +1,7 @@
 package ru.radiknasybullin.cameraphone.data.api
 
-import io.reactivex.Single
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.radiknasybullin.cameraphone.data.entities.*
@@ -9,20 +9,20 @@ import ru.radiknasybullin.cameraphone.data.entities.*
 interface RetrofitServices {
 
     @GET("list.php")
-    fun getIngredientList(@Query("i")list : String): Call<IngredientObject>
+    suspend fun loadIngredientList(@Query("i")list : String): Response<IngredientObject>
 
     @GET("filter.php")
-    fun getRecipeListByCategories(@Query("c")category : String): Call<RecipeListObject>
+    fun loadRecipeListByCategories(@Query("c")category : String): Response<RecipeListObject>
 
     @GET("lookup.php")
-    fun getDishById(@Query("i")id: Int): Call<RecipeListObject>
+    fun loadDishById(@Query("i")id: Int): Response<RecipeListObject>
 
     @GET("list.php")
-    fun getAreaCategoriesList(@Query("a")list : String): Call<AreaCategoriesObject>
+    fun loadAreaCategoriesList(@Query("a")list : String): Response<AreaCategoriesObject>
 
     @GET("categories.php")
-    fun getMealCategories(): Call<MealCategoriesObject>
+    fun loadMealCategories(): Response<MealCategoriesObject>
 
     @GET("filter.php")
-    fun getRecipeListByArea(@Query("a")area : String): Call<RecipeListObject>
+    fun loadRecipeListByArea(@Query("a")area : String): Response<RecipeListObject>
 }

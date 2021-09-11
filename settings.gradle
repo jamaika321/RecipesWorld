@@ -1,4 +1,3 @@
-include ':bottomnavigationactivity'
-include ':fragmentmodule'
+
 include ':app'
 rootProject.name = "CameraPhone"

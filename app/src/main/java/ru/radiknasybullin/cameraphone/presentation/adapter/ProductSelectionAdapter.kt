@@ -1,10 +1,12 @@
 package ru.radiknasybullin.cameraphone.presentation.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import ru.radiknasybullin.cameraphone.R
@@ -12,10 +14,9 @@ import ru.radiknasybullin.cameraphone.data.entities.IngredientList
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProductSelectionAdapter(private val productList : List<IngredientList>, context: Context): RecyclerView.Adapter<ProductSelectionAdapter.IngredientViewHolder>(), Filterable {
+class ProductSelectionAdapter(private val productList : List<IngredientList>): RecyclerView.Adapter<ProductSelectionAdapter.IngredientViewHolder>(), Filterable {
 
     var productFilterList : List<IngredientList> = productList
-    val contextR = context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
         return IngredientViewHolder.create(parent)
     }
@@ -76,13 +77,7 @@ class ProductSelectionAdapter(private val productList : List<IngredientList>, co
         holder.productCheck.isChecked = current.isHave
 
         holder.productItem.setOnClickListener {
-
-            if(holder.productCheck.isChecked == true)
-            {
-                holder.productCheck.isChecked = false
-            } else {
-                holder.productCheck.isChecked = true
-            }
+            !holder.productCheck.isChecked
             saveCheckedProducts(holder, position)
         }
         holder.productCheck.setOnClickListener {
@@ -92,12 +87,7 @@ class ProductSelectionAdapter(private val productList : List<IngredientList>, co
     }
 
     fun saveCheckedProducts(holder: IngredientViewHolder, position: Int){
-        if(holder.productCheck.isChecked == true)
-        {
-            productFilterList[position].isHave = true
-        } else {
-            productFilterList[position].isHave = false
-        }
+        productFilterList[position].isHave = holder.productCheck.isChecked == true
     }
 
     fun getActualProductList(): Array<IngredientList> {

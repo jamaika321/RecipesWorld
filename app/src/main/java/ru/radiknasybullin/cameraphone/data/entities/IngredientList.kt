@@ -7,31 +7,29 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "ingredients")
-class IngredientList (
+class IngredientList(
         @PrimaryKey(autoGenerate = true)
-        val id : Int,
+        val id: Int,
         @SerializedName("strIngredient")
-        val strName : String?,
+        val strName: String? = "",
         @SerializedName("strDescription")
-        val strDescription : String?,
+        val strDescription: String? = "",
         var isHave: Boolean = false
-        ) : Parcelable {
+        ) :Parcelable {
         constructor(parcel: Parcel) : this(
                 parcel.readInt(),
                 parcel.readString(),
                 parcel.readString(),
-                parcel.readByte() != 0.toByte()) {
-        }
-
-        override fun writeToParcel(parcel: Parcel, flags: Int) {
-                parcel.writeInt(id)
-                parcel.writeString(strName)
-                parcel.writeString(strDescription)
-                parcel.writeByte(if (isHave) 1 else 0)
+                parcel.readByte() != 0.toByte()
+        ) {
         }
 
         override fun describeContents(): Int {
-                return 0
+                TODO("Not yet implemented")
+        }
+
+        override fun writeToParcel(dest: Parcel?, flags: Int) {
+                TODO("Not yet implemented")
         }
 
         companion object CREATOR : Parcelable.Creator<IngredientList> {

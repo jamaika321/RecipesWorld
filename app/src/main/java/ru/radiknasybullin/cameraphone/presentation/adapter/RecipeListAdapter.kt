@@ -1,7 +1,6 @@
 package ru.radiknasybullin.cameraphone.presentation.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,7 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.radiknasybullin.cameraphone.R
-import ru.radiknasybullin.cameraphone.presentation.presenters.ui.CookingActivity
 import ru.radiknasybullin.cameraphone.data.entities.RecipeList
-import ru.radiknasybullin.cameraphone.domain.interfaces.ListItemClickListener
 
 class RecipeListAdapter(recipeListR : List<RecipeList>, contextR: Context?): RecyclerView.Adapter<RecipeListAdapter.RecipeListViewHolder>() {
 
@@ -47,12 +44,6 @@ class RecipeListAdapter(recipeListR : List<RecipeList>, contextR: Context?): Rec
         holder.tvNameMeal?.text = current.strMeal
         Picasso.get().load(current?.strMealThumb?.toUri()).into(holder.ivIconMeal)
 
-        holder.itemView.setOnClickListener {
-            val intent = Intent(context, CookingActivity::class.java).apply{
-                putExtra("recipeName", current.strMeal)
-            }
-            context?.startActivity(intent)
-        }
     }
 
     override fun getItemCount(): Int {

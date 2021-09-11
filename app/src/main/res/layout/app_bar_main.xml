@@ -30,12 +30,27 @@
                     android:id="@+id/previous_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="15dp"
                     android:background="@drawable/prev_btn_back"
+                    android:padding="15dp"
                     android:visibility="invisible"
-                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />
+
+                <TextView
+                    android:id="@+id/tv_meal_categories"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:hint="Category"
+                    android:visibility="invisible"
+                    style="@style/HeadingTextView"
+                    android:textSize="25sp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/previous_image"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

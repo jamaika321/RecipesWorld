@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/whitish"
@@ -12,6 +12,6 @@
         app:menu="@menu/bottom_navigation_menu"
         android:id="@+id/bottom_navigation_view"
         tools:ignore="UnusedAttribute">
-    </com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </merge>
