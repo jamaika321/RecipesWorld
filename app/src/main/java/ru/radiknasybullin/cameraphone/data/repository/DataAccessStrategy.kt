@@ -6,15 +6,14 @@ import androidx.lifecycle.map
 import kotlinx.coroutines.Dispatchers
 import ru.radiknasybullin.cameraphone.data.utils.Resource
 
-fun <T, A> performUpdateOperation(databaseQuery: () -> LiveData<T>,
-                                  networkCall: suspend () -> Resource<A>,
-                                  saveCallResult: suspend (A) -> Unit): LiveData<Resource<T>> =
+fun <T, A> performGetOperation(databaseQuery: () -> LiveData<T>,
+                               networkCall: suspend () -> Resource<A>,
+                               saveCallResult: suspend (A) -> Unit): LiveData<Resource<T>> =
     liveData(Dispatchers.IO) {
         emit(Resource.loading())
         val source = databaseQuery.invoke().map { Resource.success(it) }
         emitSource(source)
 
-        Thread.sleep(1000)
         val responseStatus = networkCall.invoke()
         if(responseStatus.status == Resource.Status.SUCCESS){
             saveCallResult(responseStatus.data!!)

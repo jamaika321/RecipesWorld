@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.radiknasybullin.cameraphone.R
 import ru.radiknasybullin.cameraphone.data.entities.MealCategoriesList
+import ru.radiknasybullin.cameraphone.presentation.interfaces.ItemClickListener
+import ru.radiknasybullin.cameraphone.presentation.presenters.fragments.RecipeListFragment
 
-class FoodClassesAdapter(foodClassesListR : List<MealCategoriesList>, contextR : Context): RecyclerView.Adapter<FoodClassesAdapter.FoodClassesViewHolder>() {
+class FoodClassesAdapter(foodClassesListR : List<MealCategoriesList>, private val itemClicker: ItemClickListener): RecyclerView.Adapter<FoodClassesAdapter.FoodClassesViewHolder>(){
     private val TAG = "FoodClassesAdapter"
 
     val foodClassesList : List<MealCategoriesList> = foodClassesListR
-    val context = contextR
 
     class FoodClassesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -40,6 +41,10 @@ class FoodClassesAdapter(foodClassesListR : List<MealCategoriesList>, contextR :
         val current = foodClassesList[position]
         holder.tvFoodClasses.text = current.strCategory
         Picasso.get().load(current.strCategoryThumb.toUri()).into(holder.ivFoodClasses)
+
+        holder.itemView.setOnClickListener {
+            itemClicker.onClick(current.strCategory)
+        }
 
 
     }

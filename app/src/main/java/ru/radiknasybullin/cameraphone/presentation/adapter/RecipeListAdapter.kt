@@ -12,19 +12,13 @@ import com.squareup.picasso.Picasso
 import ru.radiknasybullin.cameraphone.R
 import ru.radiknasybullin.cameraphone.data.entities.RecipeList
 
-class RecipeListAdapter(recipeListR : List<RecipeList>, contextR: Context?): RecyclerView.Adapter<RecipeListAdapter.RecipeListViewHolder>() {
+class RecipeListAdapter(recipeListR : List<RecipeList>): RecyclerView.Adapter<RecipeListAdapter.RecipeListViewHolder>() {
 
     var recipeList : List<RecipeList> = recipeListR
-    val context : Context? = contextR
 
     class RecipeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val ivIconMeal : ImageView?
-        val tvNameMeal : TextView?
-
-        init {
-            ivIconMeal = itemView.findViewById(R.id.iv_icon_meal)
-            tvNameMeal = itemView.findViewById(R.id.tv_name_meal)
-        }
+        val ivIconMeal : ImageView? = itemView.findViewById(R.id.iv_icon_meal)
+        val tvNameMeal : TextView? = itemView.findViewById(R.id.tv_name_meal)
 
         companion object {
             fun create(parent: ViewGroup): RecipeListViewHolder {

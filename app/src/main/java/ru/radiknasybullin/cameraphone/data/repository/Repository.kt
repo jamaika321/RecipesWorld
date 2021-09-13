@@ -10,10 +10,22 @@ class Repository @Inject constructor(
     private val dao: Dao
 )  {
 
-    fun loadIngredientList() = performUpdateOperation(
+    fun loadIngredientList() = performGetOperation(
         databaseQuery = { dao.getAllIngredients() },
         networkCall = { remoteDataSource.loadIngredientList() },
         saveCallResult = { dao.insertAllIngredients(it.ingredientList)}
+    )
+
+    fun loadMealCategories() = performGetOperation(
+        databaseQuery = { dao.getMealCategories() },
+        networkCall = { remoteDataSource.loadMealCategories() },
+        saveCallResult = { dao.insertMealCategories(it.categoriesList)}
+    )
+
+    fun loadRecipeListByCategories(category: String) = performGetOperation(
+        databaseQuery = { dao.getRecipeListByCategories(category) },
+        networkCall = { remoteDataSource.loadRecipeListByCategories(category) },
+        saveCallResult = { dao.insertRecipeListByCategories(it) }
     )
 
     suspend fun updateIngredientList(ingredientList: Array<IngredientList>){

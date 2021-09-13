@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.radiknasybullin.cameraphone.R
@@ -32,16 +33,17 @@ class IngredientFragment : Fragment() {
     ): View? {
         mBinding = IngredientFragmentBinding.inflate(inflater, container, false)
         viewModel.loadData()
-        saveSelectedIngredients()
+//        saveSelectedIngredients()
         return mBinding.root
     }
 
-    fun saveSelectedIngredients(){
-        mBinding.btnSave.setOnClickListener {
-            viewModel.updateIngredientList(adapter.getActualProductList())
+//    private fun saveSelectedIngredients(){
+//        mBinding.btnSave.setOnClickListener {
+//            viewModel.updateIngredientList(adapter.getActualProductList())
+//            Toast.makeText(context, "Selected ingredients was saved!", Toast.LENGTH_SHORT).show()
 //            (activity as MainActivity).navController.navigate(R.id.action_ingredientFragment_to_recipeListFragment)
-        }
-    }
+//        }
+//    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

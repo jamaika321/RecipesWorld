@@ -12,6 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="RecipeListScreen" parent="Theme.CameraPhone">
+
     </style>
 
     <style name="ActivityCooking" parent="Theme.CameraPhone">
@@ -23,6 +29,15 @@
     <style name="Theme.ForChecked.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.ForChecked.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+<!--    <style name="Theme.NavigationDrawerActivity.NoActionBar">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--    </style>-->
+    <style name="Theme.NavigationDrawerActivity.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.NavigationDrawerActivity.PopupOverlay"
+        parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="PrimaryTextStyle">
         <item name="android:textSize">20sp</item>
