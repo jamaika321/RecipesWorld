@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.radiknasybullin.cameraphone.data.entities.MealCategoriesList
@@ -31,6 +32,7 @@ class RecipeListFragment : Fragment(), ItemClickListener{
     ): View? {
         mBinding = RecipeListFragmentBinding.inflate(inflater, container, false)
 
+        viewModel.loadMealCategories()
         getMealCategoriesFromLocalDB()
 
         return mBinding.root
@@ -92,7 +94,7 @@ class RecipeListFragment : Fragment(), ItemClickListener{
 
     private fun initFoodClassesRecyclerView(mealCategoriesList: Array<MealCategoriesList>){
         val adapter = FoodClassesAdapter(mealCategoriesList.toList(), this)
-        mBinding.rcViewRecipeList.layoutManager = LinearLayoutManager(context)
+        mBinding.rcViewRecipeList.layoutManager = GridLayoutManager(context, 2)
         mBinding.rcViewRecipeList.adapter = adapter
     }
 

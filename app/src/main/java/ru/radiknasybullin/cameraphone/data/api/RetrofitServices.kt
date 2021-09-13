@@ -12,17 +12,17 @@ interface RetrofitServices {
     suspend fun loadIngredientList(@Query("i")list : String): Response<IngredientObject>
 
     @GET("filter.php")
-    fun loadRecipeListByCategories(@Query("c")category : String): Response<RecipeListObject>
+    suspend fun loadRecipeListByCategories(@Query("c")category : String): Response<RecipeListObject>
 
     @GET("lookup.php")
-    fun loadDishById(@Query("i")id: Int): Response<RecipeListObject>
+    suspend fun loadDishById(@Query("i")id: Int): Response<RecipeListObject>
 
     @GET("list.php")
-    fun loadAreaCategoriesList(@Query("a")list : String): Response<AreaCategoriesObject>
+    suspend fun loadAreaCategoriesList(@Query("a")list : String): Response<AreaCategoriesObject>
 
     @GET("categories.php")
-    fun loadMealCategories(): Response<MealCategoriesObject>
+    suspend fun loadMealCategories(): Response<MealCategoriesObject>
 
     @GET("filter.php")
-    fun loadRecipeListByArea(@Query("a")area : String): Response<RecipeListObject>
+    suspend fun loadRecipeListByArea(@Query("a")area : String): Response<RecipeListObject>
 }

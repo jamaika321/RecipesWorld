@@ -81,6 +81,7 @@ class IngredientFragment : Fragment() {
                     mBinding.rcView.visibility = View.GONE
                 }
                 Resource.Status.SUCCESS -> {
+                    Timber.d("Success")
                     if (!it.data.isNullOrEmpty()) {
                         mBinding.ingredientsProgressBar.visibility = View.GONE
                         mBinding.rcView.visibility = View.VISIBLE
