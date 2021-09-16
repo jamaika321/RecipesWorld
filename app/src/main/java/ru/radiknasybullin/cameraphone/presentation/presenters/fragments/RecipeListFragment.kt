@@ -50,6 +50,7 @@ class RecipeListFragment : Fragment(), ItemClickListener{
                     Timber.d("Meal Success")
                     if (!it.data.isNullOrEmpty()) {
                         initFoodClassesRecyclerView(it.data)
+                        backFromRecipeListToFoodClasses(it.data)
                     }
                     mBinding.recipeListProgressBar.visibility = View.GONE
                     mBinding.rcViewRecipeList.visibility = View.VISIBLE
@@ -72,7 +73,7 @@ class RecipeListFragment : Fragment(), ItemClickListener{
                 }
                 Resource.Status.SUCCESS -> {
                     Timber.d("Recipe Success")
-                    if (!it.data!!.recipeList.isNullOrEmpty()) {
+                    if (it.data != null) {
                         initRecipeListRecyclerView(it.data.recipeList)
                     }
                     mBinding.recipeListProgressBar.visibility = View.GONE
@@ -90,6 +91,15 @@ class RecipeListFragment : Fragment(), ItemClickListener{
         val adapter = RecipeListAdapter(recipeList)
         mBinding.rcViewRecipeList.layoutManager = LinearLayoutManager(context)
         mBinding.rcViewRecipeList.adapter = adapter
+        mBinding.previousImage.visibility = View.VISIBLE
+
+    }
+
+    private fun backFromRecipeListToFoodClasses(categories: Array<MealCategoriesList>){
+        mBinding.previousImage.setOnClickListener{
+            initFoodClassesRecyclerView(categories)
+            mBinding.previousImage.visibility = View.INVISIBLE
+        }
     }
 
     private fun initFoodClassesRecyclerView(mealCategoriesList: Array<MealCategoriesList>){

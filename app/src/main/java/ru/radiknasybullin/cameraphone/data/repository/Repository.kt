@@ -3,6 +3,7 @@ package ru.radiknasybullin.cameraphone.data.repository
 import ru.radiknasybullin.cameraphone.data.api.RemoteDataSource
 import ru.radiknasybullin.cameraphone.data.db.dao.Dao
 import ru.radiknasybullin.cameraphone.data.entities.IngredientList
+import ru.radiknasybullin.cameraphone.data.entities.RecipeListObject
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -22,10 +23,11 @@ class Repository @Inject constructor(
         saveCallResult = { dao.insertMealCategories(it.categoriesList)}
     )
 
-    fun loadRecipeListByCategories(category: String) = performGetOperation(
+    fun loadRecipeListByCategories(category: String) = saveRecipeList(
         databaseQuery = { dao.getRecipeListByCategories(category) },
         networkCall = { remoteDataSource.loadRecipeListByCategories(category) },
-        saveCallResult = { dao.insertRecipeListByCategories(it) }
+        saveCallResult = { dao.insertRecipeList(it) },
+        category = category
     )
 
     suspend fun updateIngredientList(ingredientList: Array<IngredientList>){

@@ -9,12 +9,10 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import ru.radiknasybullin.cameraphone.R
 import ru.radiknasybullin.cameraphone.data.entities.IngredientList
 import ru.radiknasybullin.cameraphone.data.utils.Resource
 import ru.radiknasybullin.cameraphone.databinding.IngredientFragmentBinding
 import ru.radiknasybullin.cameraphone.presentation.adapter.ProductSelectionAdapter
-import ru.radiknasybullin.cameraphone.presentation.presenters.MainActivity
 import ru.radiknasybullin.cameraphone.presentation.presenters.viewModel.IngredientViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -33,22 +31,21 @@ class IngredientFragment : Fragment() {
     ): View? {
         mBinding = IngredientFragmentBinding.inflate(inflater, container, false)
         viewModel.loadData()
-//        saveSelectedIngredients()
+        saveSelectedIngredients()
         return mBinding.root
     }
 
-//    private fun saveSelectedIngredients(){
-//        mBinding.btnSave.setOnClickListener {
-//            viewModel.updateIngredientList(adapter.getActualProductList())
-//            Toast.makeText(context, "Selected ingredients was saved!", Toast.LENGTH_SHORT).show()
-//            (activity as MainActivity).navController.navigate(R.id.action_ingredientFragment_to_recipeListFragment)
-//        }
-//    }
+    private fun saveSelectedIngredients(){
+        mBinding.btnSave.setOnClickListener {
+            viewModel.updateIngredientList(adapter.getActualProductList())
+            Toast.makeText(context, "Selected ingredients was saved!", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val fakeIngredientList: List<IngredientList> = listOf(IngredientList(0))
+        val fakeIngredientList: List<IngredientList> = listOf(IngredientList(""))
 
         adapter = ProductSelectionAdapter(fakeIngredientList)
         mBinding.rcView.layoutManager = LinearLayoutManager(context)
@@ -77,6 +74,7 @@ class IngredientFragment : Fragment() {
         viewModel.ingredientsList!!.observe(viewLifecycleOwner, {
             when(it.status){
                 Resource.Status.LOADING -> {
+                    Timber.d("Loading")
                     mBinding.ingredientsProgressBar.visibility = View.VISIBLE
                     mBinding.rcView.visibility = View.GONE
                 }
@@ -89,6 +87,7 @@ class IngredientFragment : Fragment() {
                     }
                 }
                 Resource.Status.ERROR -> {
+                    Timber.d("Error")
                     mBinding.ingredientsProgressBar.visibility = View.GONE
                     Timber.d(it.message)
                 }

@@ -6,10 +6,9 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "foodClasses")
 class MealCategoriesList (
-    @PrimaryKey(autoGenerate = true)
-    val id : Int,
+    @PrimaryKey
     @SerializedName("strCategory")
-    val strCategory: String = "",
+    val strCategory: String,
     @SerializedName("strCategoryThumb")
     val strCategoryThumb : String = "",
     @SerializedName("strCategoryDescription")

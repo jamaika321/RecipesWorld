@@ -64,17 +64,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.activity_main_drawer, menu)
-//        return true
-//    }
-//
-//    override fun onSupportNavigateUp(): Boolean {
-//        val navController = findNavController(R.id.my_nav_host_fragment)
-//        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-//    }
-
     private fun changeFragment(frag: Fragment){
         val fragmentManager = supportFragmentManager.beginTransaction()
         fragmentManager.replace(R.id.my_nav_host_fragment, frag).commit()

@@ -8,28 +8,28 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "ingredients")
 class IngredientList(
-        @PrimaryKey(autoGenerate = true)
-        val id: Int,
+        @PrimaryKey
         @SerializedName("strIngredient")
-        val strName: String? = "",
+        val strName: String,
         @SerializedName("strDescription")
         val strDescription: String? = "",
         var isHave: Boolean = false
         ) :Parcelable {
         constructor(parcel: Parcel) : this(
-                parcel.readInt(),
-                parcel.readString(),
+                parcel.readString()!!,
                 parcel.readString(),
                 parcel.readByte() != 0.toByte()
         ) {
         }
 
-        override fun describeContents(): Int {
-                TODO("Not yet implemented")
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+                parcel.writeString(strName)
+                parcel.writeString(strDescription)
+                parcel.writeByte(if (isHave) 1 else 0)
         }
 
-        override fun writeToParcel(dest: Parcel?, flags: Int) {
-                TODO("Not yet implemented")
+        override fun describeContents(): Int {
+                return 0
         }
 
         companion object CREATOR : Parcelable.Creator<IngredientList> {

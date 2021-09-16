@@ -19,8 +19,9 @@
             android:id="@+id/tv_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/IngredientTextView"
             android:layout_margin="20dp"
-            android:text="Название продукта"
+            android:text="Product name"
             />
 
         <CheckBox

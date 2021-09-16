@@ -77,7 +77,7 @@ class ProductSelectionAdapter(private val productList : List<IngredientList>): R
         holder.productCheck.isChecked = current.isHave
 
         holder.productItem.setOnClickListener {
-            !holder.productCheck.isChecked
+            holder.productCheck.isChecked = !holder.productCheck.isChecked
             saveCheckedProducts(holder, position)
         }
         holder.productCheck.setOnClickListener {

@@ -28,12 +28,12 @@ interface Dao {
     //Recipes
     @Query("Select * From recipeList Where name = :categories")
     fun getRecipeListByCategories(categories: String): LiveData<RecipeListObject>
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipeListByCategories(recipeList: RecipeListObject)
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertRecipeListByCategories(recipeList: RecipeListObject)
     @Query("Select * From recipes Where strMeal = :name")
     fun getRecipeByName(name: String): LiveData<RecipeList>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipeList(recipeList : List<RecipeList>)
+    suspend fun insertRecipeList(recipeList : RecipeListObject)
 
     @Query("Select * From recipes Where idMeal = :id")
     fun getDishById(id : Int): LiveData<RecipeList>
