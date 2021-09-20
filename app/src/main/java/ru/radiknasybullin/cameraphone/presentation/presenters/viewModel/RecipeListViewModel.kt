@@ -13,15 +13,10 @@ class RecipeListViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    var recipeList: LiveData<Resource<RecipeListObject>>? = null
+    fun recipeList(category: String) = repository.loadRecipeListByCategories(category)
 
-    var mealCategories: LiveData<Resource<Array<MealCategoriesList>>>? = null
+    var mealCategories = repository.loadMealCategories()
 
-    fun loadMealCategories(){
-        mealCategories = repository.loadMealCategories()
-    }
 
-    fun loadRecipeListByCategories(category: String){
-        recipeList = repository.loadRecipeListByCategories(category)
-    }
+
 }

@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.MainThread
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import ru.radiknasybullin.cameraphone.R
 import ru.radiknasybullin.cameraphone.data.entities.MealCategoriesList
 import ru.radiknasybullin.cameraphone.data.entities.RecipeList
 import ru.radiknasybullin.cameraphone.data.utils.Resource
@@ -15,6 +20,8 @@ import ru.radiknasybullin.cameraphone.databinding.RecipeListFragmentBinding
 import ru.radiknasybullin.cameraphone.presentation.adapter.FoodClassesAdapter
 import ru.radiknasybullin.cameraphone.presentation.adapter.RecipeListAdapter
 import ru.radiknasybullin.cameraphone.presentation.interfaces.ItemClickListener
+import ru.radiknasybullin.cameraphone.presentation.presenters.MainActivity
+import ru.radiknasybullin.cameraphone.presentation.presenters.viewModel.RecipeDetailViewModel
 import ru.radiknasybullin.cameraphone.presentation.presenters.viewModel.RecipeListViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -31,15 +38,24 @@ class RecipeListFragment : Fragment(), ItemClickListener{
         savedInstanceState: Bundle?
     ): View? {
         mBinding = RecipeListFragmentBinding.inflate(inflater, container, false)
-
-        viewModel.loadMealCategories()
-        getMealCategoriesFromLocalDB()
-
         return mBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        backFromRecipeListToFoodClasses()
+
+        val strCategory = arguments?.getString("category")
+        if (!strCategory.isNullOrEmpty()) {
+            getRecipeListByCategories(strCategory)
+        }else{
+            getMealCategoriesFromLocalDB()
+        }
+    }
+
     private fun getMealCategoriesFromLocalDB(){
-        viewModel.mealCategories!!.observe(viewLifecycleOwner, {
+        viewModel.mealCategories!!.observe(viewLifecycleOwner, Observer {
             when(it.status){
                 Resource.Status.LOADING -> {
                     Timber.d("Meal Loading")
@@ -50,8 +66,8 @@ class RecipeListFragment : Fragment(), ItemClickListener{
                     Timber.d("Meal Success")
                     if (!it.data.isNullOrEmpty()) {
                         initFoodClassesRecyclerView(it.data)
-                        backFromRecipeListToFoodClasses(it.data)
                     }
+                    mBinding.tvMealCategories.text = "Categories"
                     mBinding.recipeListProgressBar.visibility = View.GONE
                     mBinding.rcViewRecipeList.visibility = View.VISIBLE
                 }
@@ -63,8 +79,8 @@ class RecipeListFragment : Fragment(), ItemClickListener{
         })
     }
 
-    private fun getRecipeListByCategories(){
-        viewModel.recipeList!!.observe(viewLifecycleOwner, {
+    private fun getRecipeListByCategories(category: String){
+        viewModel.recipeList(category).observe(viewLifecycleOwner, {
             when(it.status){
                 Resource.Status.LOADING -> {
                     Timber.d("Recipe Loading")
@@ -88,16 +104,19 @@ class RecipeListFragment : Fragment(), ItemClickListener{
     }
 
     private fun initRecipeListRecyclerView(recipeList: List<RecipeList>){
-        val adapter = RecipeListAdapter(recipeList)
+        val adapter = RecipeListAdapter(recipeList, this)
         mBinding.rcViewRecipeList.layoutManager = LinearLayoutManager(context)
         mBinding.rcViewRecipeList.adapter = adapter
         mBinding.previousImage.visibility = View.VISIBLE
+    }
+
+    private fun switchToRecipeDetailFragment(recipe: String){
 
     }
 
-    private fun backFromRecipeListToFoodClasses(categories: Array<MealCategoriesList>){
+    private fun backFromRecipeListToFoodClasses(){
         mBinding.previousImage.setOnClickListener{
-            initFoodClassesRecyclerView(categories)
+            getMealCategoriesFromLocalDB()
             mBinding.previousImage.visibility = View.INVISIBLE
         }
     }
@@ -108,8 +127,14 @@ class RecipeListFragment : Fragment(), ItemClickListener{
         mBinding.rcViewRecipeList.adapter = adapter
     }
 
-    override fun onClick(category: String) {
-        viewModel.loadRecipeListByCategories(category)
-        getRecipeListByCategories()
+    override fun onClick(itemName: String, type: String) {
+        if (type == "recipe"){
+            findNavController().navigate(
+                R.id.action_nav_categories_to_nav_detail,
+                bundleOf("id" to itemName.toInt())
+            )
+        } else if(type == "category"){
+            getRecipeListByCategories(itemName)
+        }
     }
 }

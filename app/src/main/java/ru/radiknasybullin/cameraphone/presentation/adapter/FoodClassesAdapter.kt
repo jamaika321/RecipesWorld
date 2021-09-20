@@ -43,7 +43,7 @@ class FoodClassesAdapter(foodClassesListR : List<MealCategoriesList>, private va
         Picasso.get().load(current.strCategoryThumb.toUri()).into(holder.ivFoodClasses)
 
         holder.itemView.setOnClickListener {
-            itemClicker.onClick(current.strCategory)
+            itemClicker.onClick(current.strCategory, "category")
         }
 
 

@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.radiknasybullin.cameraphone.R
 import ru.radiknasybullin.cameraphone.data.entities.RecipeList
+import ru.radiknasybullin.cameraphone.presentation.interfaces.ItemClickListener
+import timber.log.Timber
 
-class RecipeListAdapter(recipeListR : List<RecipeList>): RecyclerView.Adapter<RecipeListAdapter.RecipeListViewHolder>() {
+class RecipeListAdapter(recipeListR : List<RecipeList>, private val itemClicker: ItemClickListener): RecyclerView.Adapter<RecipeListAdapter.RecipeListViewHolder>() {
 
     var recipeList : List<RecipeList> = recipeListR
 
@@ -37,6 +39,10 @@ class RecipeListAdapter(recipeListR : List<RecipeList>): RecyclerView.Adapter<Re
         val current = recipeList[position]
         holder.tvNameMeal?.text = current.strMeal
         Picasso.get().load(current?.strMealThumb?.toUri()).into(holder.ivIconMeal)
+
+        holder.itemView.setOnClickListener {
+            itemClicker.onClick(current.idMeal.toString(), "recipe")
+        }
 
     }
 

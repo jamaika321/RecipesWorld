@@ -3,6 +3,7 @@ package ru.radiknasybullin.cameraphone.presentation.presenters
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import ru.radiknasybullin.cameraphone.R
 import ru.radiknasybullin.cameraphone.databinding.ActivityMainBinding
 import ru.radiknasybullin.cameraphone.presentation.presenters.fragments.IngredientFragment
+import ru.radiknasybullin.cameraphone.presentation.presenters.fragments.RecipeDetailFragment
 import ru.radiknasybullin.cameraphone.presentation.presenters.fragments.RecipeListFragment
 import timber.log.Timber
 
@@ -28,7 +30,7 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +47,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navView = binding.navView
         navView.setNavigationItemSelectedListener (this)
 
-        changeFragment(IngredientFragment())
+        changeFragment(RecipeListFragment())
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId){
             R.id.nav_categories -> {
                 Timber.d("Categories")
@@ -57,6 +58,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_ingredients -> {
                 changeFragment(IngredientFragment())
+            }
+            R.id.nav_detail -> {
+
             }
         }
         val drawer = binding.drawerLayout

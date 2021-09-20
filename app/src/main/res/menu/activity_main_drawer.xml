@@ -11,10 +11,10 @@
         <item
             android:id="@+id/nav_ingredients"
             android:title="Ingredients"/>
-<!--        <item-->
-<!--            android:id="@+id/nav_favorites"-->
-<!--            android:icon="@drawable/ic_baseline_favorite_24"-->
-<!--            android:title="Favorites" />-->
+        <item
+            android:id="@+id/nav_detail"
+            android:icon="@drawable/ic_random_icon"
+            android:title="Favorites" />
 <!--        <item-->
 <!--            android:id="@+id/nav_country"-->
 <!--            android:icon="@drawable/country_categories_icon"-->

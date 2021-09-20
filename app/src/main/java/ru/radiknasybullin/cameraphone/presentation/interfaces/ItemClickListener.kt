@@ -1,5 +1,5 @@
 package ru.radiknasybullin.cameraphone.presentation.interfaces
 
 interface ItemClickListener {
-    fun onClick(category: String)
+    fun onClick(itemName: String, type: String)
 }

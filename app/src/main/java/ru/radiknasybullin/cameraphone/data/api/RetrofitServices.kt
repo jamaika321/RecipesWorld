@@ -15,7 +15,7 @@ interface RetrofitServices {
     suspend fun loadRecipeListByCategories(@Query("c")category : String): Response<RecipeListObject>
 
     @GET("lookup.php")
-    suspend fun loadDishById(@Query("i")id: Int): Response<RecipeListObject>
+    suspend fun loadRecipeById(@Query("i")id: Int): Response<RecipeListObject>
 
     @GET("list.php")
     suspend fun loadAreaCategoriesList(@Query("a")list : String): Response<AreaCategoriesObject>
@@ -25,4 +25,6 @@ interface RetrofitServices {
 
     @GET("filter.php")
     suspend fun loadRecipeListByArea(@Query("a")area : String): Response<RecipeListObject>
+
+
 }

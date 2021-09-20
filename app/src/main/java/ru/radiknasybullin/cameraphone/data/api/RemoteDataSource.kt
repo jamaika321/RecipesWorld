@@ -9,7 +9,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun loadIngredientList() = getResult { retrofitService.loadIngredientList("list") }
     suspend fun loadRecipeListByCategories(category: String) =
         getResult { retrofitService.loadRecipeListByCategories(category) }
-    suspend fun loadDishById(id: Int) = getResult { retrofitService.loadDishById(id) }
+    suspend fun loadRecipeById(id: Int) = getResult { retrofitService.loadRecipeById(id) }
     suspend fun loadAreaCategoriesList() = getResult { retrofitService.loadAreaCategoriesList("list") }
     suspend fun loadMealCategories() = getResult { retrofitService.loadMealCategories() }
     suspend fun loadRecipeListByArea(area: String) = getResult { retrofitService.loadRecipeListByArea(area) }
