@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.app_bar_main.*
 import ru.radiknasybullin.cameraphone.R
 import ru.radiknasybullin.cameraphone.databinding.ActivityMainBinding
+import ru.radiknasybullin.cameraphone.presentation.presenters.fragments.FavoriteListFragment
 import ru.radiknasybullin.cameraphone.presentation.presenters.fragments.IngredientFragment
 import ru.radiknasybullin.cameraphone.presentation.presenters.fragments.RecipeDetailFragment
 import ru.radiknasybullin.cameraphone.presentation.presenters.fragments.RecipeListFragment
@@ -53,14 +55,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.nav_categories -> {
-                Timber.d("Categories")
                 changeFragment(RecipeListFragment())
             }
             R.id.nav_ingredients -> {
                 changeFragment(IngredientFragment())
             }
-            R.id.nav_detail -> {
-
+            R.id.nav_favorites -> {
+                changeFragment(FavoriteListFragment())
             }
         }
         val drawer = binding.drawerLayout

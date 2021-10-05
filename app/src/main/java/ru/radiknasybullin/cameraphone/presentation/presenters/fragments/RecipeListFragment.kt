@@ -110,10 +110,6 @@ class RecipeListFragment : Fragment(), ItemClickListener{
         mBinding.previousImage.visibility = View.VISIBLE
     }
 
-    private fun switchToRecipeDetailFragment(recipe: String){
-
-    }
-
     private fun backFromRecipeListToFoodClasses(){
         mBinding.previousImage.setOnClickListener{
             getMealCategoriesFromLocalDB()

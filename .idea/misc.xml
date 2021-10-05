@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/layout/bottom_navigation_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/food_adapter_item.xml" value="0.234375" />
         <entry key="app/src/main/res/layout/food_classes_item.xml" value="0.21851851851851853" />
+        <entry key="app/src/main/res/layout/fragment_favorite_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/ingredient_fragment.xml" value="0.234375" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.234375" />
         <entry key="app/src/main/res/layout/product_item.xml" value="0.2046875" />

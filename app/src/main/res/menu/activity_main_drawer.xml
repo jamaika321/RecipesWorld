@@ -12,8 +12,8 @@
             android:id="@+id/nav_ingredients"
             android:title="Ingredients"/>
         <item
-            android:id="@+id/nav_detail"
-            android:icon="@drawable/ic_random_icon"
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_baseline_star_on"
             android:title="Favorites" />
 <!--        <item-->
 <!--            android:id="@+id/nav_country"-->

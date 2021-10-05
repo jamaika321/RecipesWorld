@@ -17,6 +17,5 @@ class RecipeListViewModel @Inject constructor(
 
     var mealCategories = repository.loadMealCategories()
 
-
-
+    var favoriteList = repository.getFavoriteList()
 }

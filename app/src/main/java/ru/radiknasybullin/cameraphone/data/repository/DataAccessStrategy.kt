@@ -5,6 +5,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Response
+import ru.radiknasybullin.cameraphone.data.entities.RecipeList
 import ru.radiknasybullin.cameraphone.data.entities.RecipeListObject
 import ru.radiknasybullin.cameraphone.data.utils.Resource
 
@@ -25,6 +26,13 @@ fun <T, A> performGetOperation(databaseQuery: () -> LiveData<T>,
         }
         emitSource(source)
     }
+
+fun getFavoriteList(databaseQuery: () -> LiveData<Array<RecipeList>>): LiveData<Resource<Array<RecipeList>>> =
+    liveData {
+        emit(Resource.loading())
+        val source = databaseQuery.invoke().map {Resource.success(it)}
+        emitSource(source)
+}
 
 fun saveRecipeList(databaseQuery: () -> LiveData<RecipeListObject>,
                        networkCall: suspend () -> Resource<RecipeListObject>,

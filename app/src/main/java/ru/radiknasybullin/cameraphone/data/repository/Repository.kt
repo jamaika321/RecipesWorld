@@ -30,6 +30,10 @@ class Repository @Inject constructor(
         category = category
     )
 
+    fun getFavoriteList() = getFavoriteList(
+        databaseQuery = { dao.getFavoriteRecipes(true)}
+    )
+
     suspend fun updateIngredientList(ingredientList: Array<IngredientList>){
         dao.updateIngredientList(ingredientList)
     }
